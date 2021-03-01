@@ -96,16 +96,16 @@
 
 //#endregion
 
-//#region Encapsulating State logic
+//#region Custom Hooks section
 
 import React, { useState } from "react";
 import { usePicture } from "./hooks/usePicture";
 
 const App = () => {
   let [date, setDate] = useState("2020-05-05");
-  let picture = usePicture(date);
+  let { picture, loading } = usePicture(date);
   console.log(picture);
-  if (!picture) return <div>Loading..</div>;
+  if (loading) return <div>Loading..</div>;
   return (
     <div>
       <input

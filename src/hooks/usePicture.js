@@ -1,23 +1,10 @@
-import { useEffect, useState } from "react";
-
-export const fetchPicture = async (date, setPicture) => {
-  try {
-    let response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`
-    );
-    let json = await response.json();
-    setPicture(json);
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { useState } from "react";
+import { useNetwork } from "./useNetwork";
 
 export const usePicture = (date) => {
-  const [picture, setPicture] = useState();
+  let { data, loading } = useNetwork({
+    url: `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`,
+  });
 
-  useEffect(() => {
-    fetchPicture(date, setPicture);
-  }, [date]);
-
-  return picture;
+  return { picture: data, loading };
 };
