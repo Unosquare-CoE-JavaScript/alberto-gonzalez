@@ -1,7 +1,7 @@
 import React from "react";
 import { useChat } from "../hooks/useChat";
 
-const Input = () => {
+const Input = ({ onChange, onEnter }) => {
   let { state, dispatch } = useChat();
 
   return (
