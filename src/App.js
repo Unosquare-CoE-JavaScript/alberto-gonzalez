@@ -134,22 +134,78 @@
 //#endregion
 
 //#region useCallBack
-import React, { useCallback, useState } from "react";
-import { useComplete } from "./hooks/useComplete";
+// import React, { useCallback, useState } from "react";
+// import { useComplete } from "./hooks/useComplete";
+
+// const App = () => {
+//   let [clicked, setClicked] = useState();
+
+//   let completeCallback = useCallback((data) => console.log(data), []);
+//   useComplete(completeCallback);
+
+//   return (
+//     <div onClick={() => setClicked(!clicked)}>
+//       Hello {clicked ? "clicked" : "not clicked"}
+//     </div>
+//   );
+// };
+
+//#endregion
+
+import React, { useState } from "react";
+import Input from "./Components/Input";
+import Message from "./Components/Message";
+import { useFakeConvo } from "./hooks/useFakeConvo";
+import { useScrollToBottom } from "./hooks/useScroollToBottom";
+
+const styles = {
+  wrapper: {
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  container: {
+    display: "flex",
+    overflow: "scroll",
+    height: "max-content",
+    flexDirection: "column",
+  },
+};
+
+const initialMessages = [
+  { id: 1, content: "Hello there!", from: "me" },
+  { id: 2, content: "How are you doing?", from: "Steven" },
+  { id: 3, content: "Pretty good?", from: "me" },
+];
 
 const App = () => {
-  let [clicked, setClicked] = useState();
+  let [messages, setMessages] = useState(initialMessages);
+  let [currentMessage, setCurrentMessage] = useState("");
 
-  let completeCallback = useCallback((data) => console.log(data), []);
-  useComplete(completeCallback);
+  useFakeConvo(setMessages);
+  let scrollRef = useScrollToBottom(messages);
 
   return (
-    <div onClick={() => setClicked(!clicked)}>
-      Hello {clicked ? "clicked" : "not clicked"}
+    <div style={styles.wrapper}>
+      <div style={styles.container} ref={(ref) => (scrollRef.current = ref)}>
+        {messages.map((message) => (
+          <Message key={message.id} message={message} />
+        ))}
+      </div>
+      <Input
+        value={currentMessage}
+        onChange={(content) => setCurrentMessage(content)}
+        onEnter={(content) => {
+          setCurrentMessage("");
+          setMessages([
+            ...messages,
+            { id: messages.length + 1, content, from: "me" },
+          ]);
+        }}
+      />
     </div>
   );
 };
-
-//#endregion
 
 export default App;
