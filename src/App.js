@@ -155,9 +155,9 @@
 import React from "react";
 import Input from "./Components/Input";
 import Message from "./Components/Message";
+import { ChatProvider, useChat } from "./hooks/useChat";
 import { useFakeConvo } from "./hooks/useFakeConvo";
 import { useScrollToBottom } from "./hooks/useScroollToBottom";
-import { useChatReducer } from "./Reducers/chatReducer";
 
 const styles = {
   wrapper: {
@@ -175,10 +175,10 @@ const styles = {
 };
 
 const App = () => {
-  let [state, dispatch] = useChatReducer();
+  let { state } = useChat();
 
-  useFakeConvo(dispatch);
-  let scrollRef = useScrollToBottom(state.messages);
+  useFakeConvo();
+  let scrollRef = useScrollToBottom();
 
   return (
     <div style={styles.wrapper}>
@@ -187,12 +187,16 @@ const App = () => {
           <Message key={message.id} message={message} />
         ))}
       </div>
-      <Input
-        value={state.currentMessage}
-        onChange={(message) => dispatch({ type: "setCurrentMessage", message })}
-        onEnter={(message) => dispatch({ type: "addMessage", message })}
-      />
+      <Input />
     </div>
+  );
+};
+
+export const AppContainer = () => {
+  return (
+    <ChatProvider>
+      <App />
+    </ChatProvider>
   );
 };
 
