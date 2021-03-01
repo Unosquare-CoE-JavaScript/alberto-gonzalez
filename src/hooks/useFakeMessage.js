@@ -1,17 +1,14 @@
 import { useEffect } from "react";
 
 export const useFakeMessage = ({
-  setMessages,
+  dispatch,
   message,
   from = "Test",
   timeout = 5000,
 }) => {
   useEffect(() => {
     setTimeout(() => {
-      setMessages((messages) => [
-        ...messages,
-        { id: messages.length + 1, content: message, from },
-      ]);
+      dispatch({ type: "addMessage", message });
     }, timeout);
-  }, [setMessages, message, from, timeout]);
+  }, [dispatch, message, from, timeout]);
 };
