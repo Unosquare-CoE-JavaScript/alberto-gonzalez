@@ -98,27 +98,27 @@
 
 //#region Custom Hooks section
 
-import React, { useState } from "react";
-import { usePicture } from "./hooks/usePicture";
+// import React, { useState } from "react";
+// import { usePicture } from "./hooks/usePicture";
 
-const App = () => {
-  let [date, setDate] = useState("2020-05-05");
-  let { picture, loading } = usePicture(date);
-  console.log(picture);
-  if (loading) return <div>Loading..</div>;
-  return (
-    <div>
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <h3>Hi!</h3>
-      <div>{picture.explanation}</div>
-      <img src={picture.url} alt={picture.title}></img>
-    </div>
-  );
-};
+// const App = () => {
+//   let [date, setDate] = useState("2020-05-05");
+//   let { picture, loading } = usePicture(date);
+//   console.log(picture);
+//   if (loading) return <div>Loading..</div>;
+//   return (
+//     <div>
+//       <input
+//         type="date"
+//         value={date}
+//         onChange={(e) => setDate(e.target.value)}
+//       />
+//       <h3>Hi!</h3>
+//       <div>{picture.explanation}</div>
+//       <img src={picture.url} alt={picture.title}></img>
+//     </div>
+//   );
+// };
 
 //#endregion
 
@@ -131,6 +131,25 @@ const App = () => {
 
 //   return <div onClick={() => setCount(count + 1)}>The count is {count}</div>;
 // };
+//#endregion
+
+//#region useCallBack
+import React, { useCallback, useState } from "react";
+import { useComplete } from "./hooks/useComplete";
+
+const App = () => {
+  let [clicked, setClicked] = useState();
+
+  let completeCallback = useCallback((data) => console.log(data), []);
+  useComplete(completeCallback);
+
+  return (
+    <div onClick={() => setClicked(!clicked)}>
+      Hello {clicked ? "clicked" : "not clicked"}
+    </div>
+  );
+};
+
 //#endregion
 
 export default App;
