@@ -74,25 +74,51 @@
 //#endregion
 
 //#region useEffect
-import React from "react";
-import { useDarkMode } from "./useDarkMode";
+// import React from "react";
+// import { useDarkMode } from "./useDarkMode";
 
-function App() {
-  let isDarkMode = useDarkMode();
+// function App() {
+//   let isDarkMode = useDarkMode();
 
+//   return (
+//     <div
+//       style={{
+//         height: 500,
+//         width: 500,
+//         color: isDarkMode ? "white" : "black",
+//         backgroundColor: isDarkMode ? "black" : "white",
+//       }}
+//     >
+//       Here's some content
+//     </div>
+//   );
+// }
+
+//#endregion
+
+//#region Encapsulating State logic
+
+import React, { useState } from "react";
+import { usePicture } from "./hooks/usePicture";
+
+const App = () => {
+  let [date, setDate] = useState("2020-05-05");
+  let picture = usePicture(date);
+  console.log(picture);
+  if (!picture) return <div>Loading..</div>;
   return (
-    <div
-      style={{
-        height: 500,
-        width: 500,
-        color: isDarkMode ? "white" : "black",
-        backgroundColor: isDarkMode ? "black" : "white",
-      }}
-    >
-      Here's some content
+    <div>
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <h3>Hi!</h3>
+      <div>{picture.explanation}</div>
+      <img src={picture.url} alt={picture.title}></img>
     </div>
   );
-}
+};
 
 //#endregion
 
