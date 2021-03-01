@@ -98,28 +98,39 @@
 
 //#region Custom Hooks section
 
-import React, { useState } from "react";
-import { usePicture } from "./hooks/usePicture";
+// import React, { useState } from "react";
+// import { usePicture } from "./hooks/usePicture";
+
+// const App = () => {
+//   let [date, setDate] = useState("2020-05-05");
+//   let { picture, loading } = usePicture(date);
+//   console.log(picture);
+//   if (loading) return <div>Loading..</div>;
+//   return (
+//     <div>
+//       <input
+//         type="date"
+//         value={date}
+//         onChange={(e) => setDate(e.target.value)}
+//       />
+//       <h3>Hi!</h3>
+//       <div>{picture.explanation}</div>
+//       <img src={picture.url} alt={picture.title}></img>
+//     </div>
+//   );
+// };
+
+//#endregion
+
+//#region Creating a usePersistStorage hook
+import React from "react";
+import { useStorage } from "./hooks/useStorage";
 
 const App = () => {
-  let [date, setDate] = useState("2020-05-05");
-  let { picture, loading } = usePicture(date);
-  console.log(picture);
-  if (loading) return <div>Loading..</div>;
-  return (
-    <div>
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <h3>Hi!</h3>
-      <div>{picture.explanation}</div>
-      <img src={picture.url} alt={picture.title}></img>
-    </div>
-  );
-};
+  let [count, setCount] = useStorage("count", 0);
 
+  return <div onClick={() => setCount(count + 1)}>The count is {count}</div>;
+};
 //#endregion
 
 export default App;
