@@ -153,8 +153,8 @@
 //#endregion
 
 import React from "react";
-import Input from "./Components/Input";
-import Message from "./Components/Message";
+import { ChatInput } from "./Components/Input";
+import { ChatMessage } from "./Components/Message";
 import { ChatProvider, useChat } from "./hooks/useChat";
 import { useFakeConvo } from "./hooks/useFakeConvo";
 import { useScrollToBottom } from "./hooks/useScroollToBottom";
@@ -184,10 +184,10 @@ const App = () => {
     <div style={styles.wrapper}>
       <div style={styles.container} ref={(ref) => (scrollRef.current = ref)}>
         {state.messages.map((message) => (
-          <Message key={message.id} message={message} />
+          <ChatMessage key={message.id} message={message} />
         ))}
       </div>
-      <Input />
+      <ChatInput />
     </div>
   );
 };

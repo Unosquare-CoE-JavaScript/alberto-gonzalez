@@ -1,6 +1,17 @@
 import React from "react";
 import { useChat } from "../hooks/useChat";
 
+export const ChatMessage = ({ message }) => {
+  let { state, dispatch } = useChat();
+  return (
+    <Message
+      message={message}
+      isHighlighted={message.id === state.highlightedMessageId}
+      onQuoteClicked={() => dispatch({ type: "quoteMessage", id: message.id })}
+    />
+  );
+};
+
 const container = {
   display: "flex",
   justifyContent: "space-between",
@@ -25,23 +36,13 @@ const styles = {
   },
 };
 
-const Message = ({ message }) => {
-  let { state, dispatch } = useChat();
-
+const Message = ({ message, isHighlighted, onQuoteClicked }) => {
   return (
     <div style={message.from === "me" ? styles.sent : styles.received}>
-      <div
-        style={
-          message.id === state.highlightedMessageId
-            ? { color: "red" }
-            : undefined
-        }
-      >
+      <div style={isHighlighted ? { color: "red" } : undefined}>
         {message.content}
       </div>
-      <div onClick={() => dispatch({ type: "quoteMessage", id: message.id })}>
-        Quote
-      </div>
+      {onQuoteClicked ? <div onClick={onQuoteClicked}>Quote</div> : null}
     </div>
   );
 };
