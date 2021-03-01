@@ -55,22 +55,45 @@
 // }
 //#endregion
 
-//#region
+//#region useContext
+// import React from "react";
+// import { AppProvider } from "./appContext";
+// import Content from "./Components/Content";
+// import Sidebar from "./Components/Sidebar";
+
+// function App() {
+//   return (
+//     <AppProvider>
+//       <div>
+//         <Content />
+//         <Sidebar />
+//       </div>
+//     </AppProvider>
+//   );
+// }
+//#endregion
+
+//#region useEffect
 import React from "react";
-import { AppProvider } from "./appContext";
-import Content from "./Components/Content";
-import Sidebar from "./Components/Sidebar";
+import { useDarkMode } from "./useDarkMode";
 
 function App() {
+  let isDarkMode = useDarkMode();
+
   return (
-    <AppProvider>
-      <div>
-        <Content />
-        <Sidebar />
-      </div>
-    </AppProvider>
+    <div
+      style={{
+        height: 500,
+        width: 500,
+        color: isDarkMode ? "white" : "black",
+        backgroundColor: isDarkMode ? "black" : "white",
+      }}
+    >
+      Here's some content
+    </div>
   );
 }
+
 //#endregion
 
 export default App;
