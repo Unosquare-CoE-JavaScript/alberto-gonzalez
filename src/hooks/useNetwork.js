@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-export const useNetwork = ({ url }) => {
+export const useNetwork = ({ url, method, headers }) => {
   let [state, setState] = useState({ loading: true });
   useEffect(() => {
     setState({ loading: true });
 
     const makeRequest = async () => {
       try {
-        let response = await fetch(url);
+        let response = await fetch(url, { method, headers });
         let data = await response.json();
 
         setState({ data, loading: false });
@@ -16,7 +16,7 @@ export const useNetwork = ({ url }) => {
       }
     };
     makeRequest();
-  }, [url]);
+  }, [url, method, headers]);
 
   return state;
 };
