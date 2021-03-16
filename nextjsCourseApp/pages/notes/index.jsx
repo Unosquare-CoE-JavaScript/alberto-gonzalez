@@ -7,7 +7,6 @@ const Page = () => (
     <Link href="/notes/[id]" as={`/notes/1`}>
       <a>Note 1</a>
     </Link>
-    //name, path of the page
   </div>
 );
 
