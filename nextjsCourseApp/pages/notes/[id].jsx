@@ -14,7 +14,7 @@ export default ({ note }) => {
 
 export async function getServerSideProps({ params, req, res }) {
   console.log("Id params:", params.id);
-  const response = await fetch(`http://localhost:3000/api/note/${params.id}`);
+  const response = await fetch(`${process.env.API_URL}/api/note/${params.id}`);
 
   // so much power!
   if (!response.ok) {
