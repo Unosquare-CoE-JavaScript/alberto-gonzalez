@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/btholt/complete-intro-to-react-v4#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.13.10",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -34,14 +35,19 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "jest": "^26.6.3",
-    "parcel-bundler": "^1.12.4",
+    "parcel-bundler": "^1.12.3",
     "prettier": "^1.14.2",
     "react-test-renderer": "^17.0.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-react": "^7.12.13",
     "@reach/router": "^1.3.4",
     "petfinder-client": "^1.0.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
+  },
+  "transform": {
+    "\\.js$": "<rootDir>/node_modules/babel-jest"
   }
 }
