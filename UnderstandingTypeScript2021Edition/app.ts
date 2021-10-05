@@ -1,6 +1,9 @@
 type Combinable = number | string;
 type ConversionDescriptor = 'as-number' | 'as-text'
 
+type User = { name: string; age: number };
+const u1: User = { name: 'Max', age: 30 }; // this works!
+
 function combine(input1: Combinable, input2: Combinable, resultConversion: ConversionDescriptor) {
   let result;
   if (typeof input1 === 'number' && typeof input2 == 'number' || resultConversion == 'as-number') {
