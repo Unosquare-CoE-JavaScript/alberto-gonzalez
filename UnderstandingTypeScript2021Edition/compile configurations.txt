@@ -1,0 +1,3 @@
+tsc filename.ts -w
+tsc --init :inicializa la capeta como un proyecto de typescript
+tsc -w :inicia el watch mode de todo el proyecto una vez que ha sido iniciado
