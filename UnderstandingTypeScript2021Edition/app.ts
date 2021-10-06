@@ -5,7 +5,7 @@ class Department {
   // private name: string;
   protected employees: string[] = []
 
-  constructor(private readonly id: string, public name: string) {
+  constructor(protected readonly id: string, public name: string) {
     // this.name = n;
     // this.id = id;
   }
@@ -36,6 +36,7 @@ class ITDepartment extends Department {
 }
 class AccoutingDepartment extends Department {
   private lastReport: string;
+  private static instance: AccoutingDepartment;
 
   get mostRecentReport() {
     if (this.lastReport) {
@@ -51,7 +52,15 @@ class AccoutingDepartment extends Department {
     this.addReport(value)
   }
 
-  constructor(id: string, private reports: string[]) {
+  static getInstance() {
+    if (AccoutingDepartment.instance) {
+      return this.instance
+    }
+    this.instance = new AccoutingDepartment('d2', [])
+    return this.instance;
+  }
+
+  private constructor(id: string, private reports: string[]) {
     super(id, 'Accounting')
     this.lastReport = reports[0]
   }
@@ -76,7 +85,7 @@ class AccoutingDepartment extends Department {
 
 const employee1 = Department.createEmployee('Max')
 
-const accounting = new Department('d1', 'Accounting');
+const accounting = AccoutingDepartment.getInstance();
 accounting.describe()
 accounting.addEmployee('Max')
 accounting.addEmployee('Manu')
