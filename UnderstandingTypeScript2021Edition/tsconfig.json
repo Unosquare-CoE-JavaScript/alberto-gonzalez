@@ -99,6 +99,12 @@
   },
   "exclude": [
     "node_modules", //would be the default
-    ""
-  ]
+  ],
+  // Opcional configuration.
+  // "include": [
+  //   "app.ts"
+  // ],
+  // "files": [
+    
+  // ]
 }
