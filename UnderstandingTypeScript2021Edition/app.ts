@@ -24,6 +24,29 @@ class Department {
 
 }
 
+class ITDepartment extends Department {
+  constructor(id: string, public admins: string[]) {
+    super(id, 'IT')
+  }
+}
+class AccoutingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting')
+  }
+
+  addReport(text: string) {
+    this.reports.push(text)
+  }
+
+  printReports() {
+    console.log(this.reports);
+
+  }
+
+}
+
+
+
 const accounting = new Department('d1', 'Accounting');
 accounting.describe()
 accounting.addEmployee('Max')
