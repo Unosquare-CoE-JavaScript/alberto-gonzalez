@@ -98,6 +98,16 @@ function moveAnimal(animal: Animal) {
 
 moveAnimal({ type: 'bird', flyingSpeed: 10 })
 
-const paragraph = document.getElementById('message')! as HTMLInputElement;
+const paragraph = document.getElementById('message');
+if (paragraph) {
+  (paragraph as HTMLInputElement).value = 'Hi there!'
+}
 
-paragraph.value = 'Hi there!'
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email!',
+  username: 'Must start with a capital character!'
+}
