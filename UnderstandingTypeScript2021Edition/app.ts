@@ -60,3 +60,21 @@ const numberStorage = new DataStorage<number>();
 
 // objStorage.removeItem(maxObj)
 // console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(title: string, descripion: string, date: Date): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = descripion;
+  courseGoal.completeUntil = date
+  return courseGoal as CourseGoal
+}
+
+const names: Readonly<string[]> = ['Max', 'Anna']
+// names.push('Manu') //Methods not allow because the array is readonly
+// names.pop()        //Methods not allow because the array is readonly
