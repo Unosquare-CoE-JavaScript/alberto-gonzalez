@@ -41,6 +41,8 @@ const fetchedUserData = {
 
 console.log(fetchedUserData?.job?.title);
 
+const userInput = null;
+const storedData = userInput ?? 'DEFAULT'; //The operator '??' means that only if the user input value is null, use the 'DEFAULT' value.
 
 // type UnknowEmployee = Employee | Admin;
 // function printEployeeInformation(emp: UnknowEmployee) {
